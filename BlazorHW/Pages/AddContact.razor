@@ -1,0 +1,43 @@
+﻿@page "/AddContact"
+@using BlazorHW.Data;
+@inject ContactServices objContactServices
+@inject NavigationManager navman;
+
+<h1>Add A New Contact!</h1>
+
+<form>
+    <label>Last Name</label>
+    <input placeholder="Last Name" @bind="@objContact.LastName"/>
+    <br />
+
+    <label>First Name</label>
+    <input placeholder="First Name" @bind="objContact.FirstName"/>
+    <br />
+
+    <label>Phone Number</label>
+    <input placeholder="Phone Number" @bind="objContact.PhoneNumber"/>
+    <br />
+
+    <label>Birthday</label>
+    <input type="date" @bind="objContact.BirthDate"/>
+</form>
+
+<button @onclick="AddNewContact">Add Contact!</button>
+<button @onclick="Cancel">Cancel</button>
+
+@code {
+    ContactInfo objContact = new ContactInfo();
+
+    public void AddNewContact()
+    {
+        objContact.Id = Guid.NewGuid();
+        objContactServices.AddContact(objContact);
+        navman.NavigateTo("contact");
+    }
+    public void Cancel()
+    {
+        navman.NavigateTo("contact");
+    }
+
+
+}

@@ -1,6 +1,6 @@
 ﻿namespace BlazorHW.Data
 {
-    public class ContactServices
+    public class ContactServices 
     {
         private readonly ContactContext _db;
 

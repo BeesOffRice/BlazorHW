@@ -7,7 +7,7 @@
 
 
 <NavLink class="nav-link" href="AddContact">
-    <span aria-hidden="true">Add Contact</span>"
+    <span aria-hidden="true">Add Contact</span>
 </NavLink>
 
 <h1>Contacts</h1>
@@ -17,7 +17,7 @@
 } 
 else
 {
-    <table>
+    <table class="table"> 
         <thead>
             <tr>
                 <th>Id</th>
@@ -36,6 +36,16 @@ else
                     <td>@c.FirstName</td>
                     <td>@c.PhoneNumber</td>
                     <td>@c.BirthDate</td>
+                    <td>
+                        <a class="nav-link" href="Edit/@c.Id">
+                            <span aria-hidden="true"></span>Edit
+                        </a>
+                    </td>
+                    <td>
+                        <a class="nav-link" href="Delete/@c.Id">
+                            <span aria-hidden="true"></span>Delete
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>
