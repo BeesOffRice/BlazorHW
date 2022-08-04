@@ -1,0 +1,32 @@
+﻿@page "/delete/{CurrentID}"
+@using BlazorHW.Data
+@inject ContactServices objContactServices
+@inject NavigationManager navman
+
+<h1>Delete</h1>
+
+<p>Are you sure you want to delete @objContact.FirstName @objContact.LastName ?</p>
+
+<button @onclick="AddNewContact">Yes</button>
+<button @onclick="Cancel">No</button>
+@code {
+    [Parameter]
+    public string CurrentID { get; set; }
+    ContactInfo objContact = new ContactInfo();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        objContact = await Task.Run(() => objContactServices.GetContactByGuid(Guid.Parse(CurrentID)));  
+    }
+
+    public void AddNewContact()
+    {
+        objContactServices.DeleteContact(objContact);
+        navman.NavigateTo("contact");
+    }
+    public void Cancel()
+    {
+        navman.NavigateTo("contact");
+    }
+}

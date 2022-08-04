@@ -1,0 +1,47 @@
+﻿@page "/edit/{CurrentID}"
+@using BlazorHW.Data
+@inject ContactServices objContactServices
+@inject NavigationManager navman
+
+<h1>Edit</h1>
+
+<form>
+    <label>Last Name</label>
+    <input placeholder="Last Name" @bind="@objContact.LastName"/>
+    <br />
+
+    <label>First Name</label>
+    <input placeholder="First Name" @bind="objContact.FirstName"/>
+    <br />
+
+    <label>Phone Number</label>
+    <input placeholder="Phone Number" @bind="objContact.PhoneNumber"/>
+    <br />
+
+    <label>Birthday</label>
+    <input type="date" @bind="objContact.BirthDate"/>
+</form>
+
+<button @onclick="AddNewContact">Save Changes</button>
+<button @onclick="Cancel">Cancel</button>
+@code {
+    [Parameter]
+    public string CurrentID { get; set; }
+    ContactInfo objContact = new ContactInfo();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        objContact = await Task.Run(() => objContactServices.GetContactByGuid(Guid.Parse(CurrentID)));  
+    }
+
+    public void AddNewContact()
+    {
+        objContactServices.UpdateContact(objContact);
+        navman.NavigateTo("contact");
+    }
+    public void Cancel()
+    {
+        navman.NavigateTo("contact");
+    }
+}

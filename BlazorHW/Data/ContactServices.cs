@@ -27,7 +27,7 @@
         }
 
         //returns an employee with the guid g
-        public ContactInfo GetEmployeeByGuid(Guid g)
+        public ContactInfo GetContactByGuid(Guid g)
         {
             ContactInfo objContact = _db.Contacts.FirstOrDefault(s => s.Id == g);
             return objContact;
