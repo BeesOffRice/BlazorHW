@@ -1,0 +1,52 @@
+﻿@page "/contact"
+@using BlazorHW.Data
+@inject ContactServices objContactServices
+
+
+<PageTitle>Contact</PageTitle>
+
+
+<NavLink class="nav-link" href="AddContact">
+    <span aria-hidden="true">Add Contact</span>"
+</NavLink>
+
+<h1>Contacts</h1>
+@if(contactlist == null)
+{
+    <p><em>Loading...</em></p>
+} 
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Phone Number</th>
+                <th>Birthday</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var c in contactlist)
+            {
+                <tr>
+                    <td>@c.Id</td>
+                    <td>@c.LastName</td>
+                    <td>@c.FirstName</td>
+                    <td>@c.PhoneNumber</td>
+                    <td>@c.BirthDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<ContactInfo> contactlist;
+
+    protected override async Task OnInitializedAsync()
+    {
+        contactlist = await Task.Run(() => objContactServices.GetContacts());  
+    }
+}
