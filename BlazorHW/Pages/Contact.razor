@@ -1,6 +1,7 @@
 ﻿@page "/contact"
 @using BlazorHW.Data
-@inject ContactServices objContactServices
+@inject ContactServices conserv
+@inject NavigationManager navman
 
 
 <PageTitle>Contact</PageTitle>
@@ -12,7 +13,7 @@
 
 <h1>Contacts</h1>
 @if(contactlist == null)
-{
+{      
     <p><em>Loading...</em></p>
 } 
 else
@@ -52,11 +53,14 @@ else
     </table>
 }
 
-@code {
+@code
+{
     List<ContactInfo> contactlist;
+    string sorts = "";
 
     protected override async Task OnInitializedAsync()
     {
-        contactlist = await Task.Run(() => objContactServices.GetContacts());  
+        contactlist = await Task.Run(() => conserv.GetContacts());  
     }
-}
+
+}  

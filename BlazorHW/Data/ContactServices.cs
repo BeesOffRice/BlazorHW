@@ -51,6 +51,81 @@
             return "Contact deleted";
         }
 
+        //sorts a list of type contactinfo alphabetically by last name
+        public void SortLastName(List<ContactInfo> list)
+        {
+            int a = 0;
+            ContactInfo placeholder;
+            char lastchar = 'k';
 
-    }
+            for(int i = 0; i < list.Count; i++)
+            {
+                a = 0;
+                while(a < list.Count)
+                {
+                    char[] ch;
+                    ch = list[i].LastName.ToCharArray();
+
+                    if (a == 0)
+                    {
+                        lastchar= ch[0];
+                        a++;
+                    } 
+                    else
+                    {
+                        if (Convert.ToInt32(ch[0]) < Convert.ToInt32(lastchar))
+                        {
+                            placeholder=list[i-1];
+                            list[i-1] = list[i];
+                            list[i] = placeholder;
+                        }
+                        else
+                        {
+                            lastchar = ch[0];
+                        }
+                        a++;
+                    }
+                }
+            }
+        }
+
+        //sorts a contacts by first name
+        public void SortFirstName(List<ContactInfo> list)
+        {
+            int a = 0;
+            ContactInfo placeholder;
+            char lastchar = 'k';
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                a = 0;
+                while (a < list.Count)
+                {
+                    char[] ch;
+                    ch = list[i].FirstName.ToCharArray();
+
+                    if (a == 0)
+                    {
+                        lastchar = ch[0];
+                        a++;
+                    }
+                    else
+                    {
+                        if (Convert.ToInt32(ch[0]) < Convert.ToInt32(lastchar))
+                        {
+                            placeholder = list[i - 1];
+                            list[i - 1] = list[i];
+                            list[i] = placeholder;
+                        }
+                        else
+                        {
+                            lastchar = ch[0];
+                        }
+                        a++;
+                    }
+                }
+            }
+        }
+
+        }
 }

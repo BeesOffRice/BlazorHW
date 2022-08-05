@@ -7,7 +7,7 @@
 
 <p>Are you sure you want to delete @objContact.FirstName @objContact.LastName ?</p>
 
-<button @onclick="AddNewContact">Yes</button>
+<button @onclick="DeleteContact">Yes</button>
 <button @onclick="Cancel">No</button>
 @code {
     [Parameter]
@@ -20,7 +20,7 @@
         objContact = await Task.Run(() => objContactServices.GetContactByGuid(Guid.Parse(CurrentID)));  
     }
 
-    public void AddNewContact()
+    public void DeleteContact()
     {
         objContactServices.DeleteContact(objContact);
         navman.NavigateTo("contact");

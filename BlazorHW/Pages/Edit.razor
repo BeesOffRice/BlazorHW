@@ -7,22 +7,22 @@
 
 <form>
     <label>Last Name</label>
-    <input placeholder="Last Name" @bind="@objContact.LastName"/>
+    <input placeholder="Last Name" @bind="@objContact.LastName" maxlength="250"/>
     <br />
 
     <label>First Name</label>
-    <input placeholder="First Name" @bind="objContact.FirstName"/>
+    <input placeholder="First Name" @bind="objContact.FirstName" maxlength="250"/>
     <br />
 
     <label>Phone Number</label>
-    <input placeholder="Phone Number" @bind="objContact.PhoneNumber"/>
+    <input placeholder="Phone Number" @bind="objContact.PhoneNumber" maxlength="15"/>
     <br />
 
     <label>Birthday</label>
     <input type="date" @bind="objContact.BirthDate"/>
 </form>
 
-<button @onclick="AddNewContact">Save Changes</button>
+<button @onclick="EditContact">Save Changes</button>
 <button @onclick="Cancel">Cancel</button>
 @code {
     [Parameter]
@@ -35,7 +35,7 @@
         objContact = await Task.Run(() => objContactServices.GetContactByGuid(Guid.Parse(CurrentID)));  
     }
 
-    public void AddNewContact()
+    public void EditContact()
     {
         objContactServices.UpdateContact(objContact);
         navman.NavigateTo("contact");
